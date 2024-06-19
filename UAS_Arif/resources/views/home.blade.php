@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Montek Creative Agency Business HTML-5 Template | Homepage</title>
+<title>Hananan Academy | Homepage</title>
 <!-- Stylesheets -->
 <link href="assets/css/bootstrap.css" rel="stylesheet">
 <link href="assets/css/style.css" rel="stylesheet">
@@ -102,15 +102,16 @@
 			<!-- Content Column -->
 			<div class="banner-one_content">
 				<div class="banner-one_content-inner">
-					<h1 class="banner-one_heading">Creative <br> Space</h1>
+					<h1 class="banner-one_heading">Hananan <br> Academy</h1>
 					<div class="lower-box d-flex justify-content-between align-items-center flex-wrap">
-						<div class="banner-one_text">Our visionary team crafts <br> transformative experiences</div>
-						<div class="banner-one_text-two">Enhancing potential and <br> driving prosperity.</div>
+						<div class="banner-one_text" style="font-size: 18px;">Memakmurkan tenaga pengajar</div>
+						<div class="banner-one_text-two" style="font-size: 16px;">
+    						Menjadi media dalam melakukan pengembangan potensi dan mencerdaskan <br>
+    						generasi sekarang agar siap menghadapi kehidupan di masa yang akan datang.
+						</div>
+
 					</div>
 				</div>
-			</div>
-			<div class="down-box scroll-to-target" data-target=".gallery-one">
-				<img src="assets/images/main-slider/down.png" alt="" />
 			</div>
 		</div>
 	</section>
@@ -121,7 +122,7 @@
 		<div class="auto-container">
 			<!-- Sec Title -->
 			<div class="sec-title">
-				<h2 class="sec-title_heading">Services</h2>
+				<h2 class="sec-title_heading">Data Siswa</h2>
 				<div class="sec-title_icon"><img src="assets/images/icons/icon-1.png" alt="" /></div>
 			</div>
 			<div class="row clearfix">
@@ -207,7 +208,7 @@
 		<div class="footer-bottom">
 			<div class="auto-container">
 				<div class="d-flex justify-content-between align-items-center flex-wrap">
-					<div class="footer_copyright">&copy; 2024 Montek  -  Made by ThemeGuri</div>
+					<div class="footer_copyright">Copyright &copy; Hananan Academy</div>
 			<a class="backtop down-box scroll-to-target" data-target=".page-wrapper">
 <i class="fa-solid fa-arrow-up"></i>
 			</a>
