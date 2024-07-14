@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('jjg');
             $table->string('hp');
             $table->string('foto');
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

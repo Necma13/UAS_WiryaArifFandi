@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Siswa;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -49,8 +50,13 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'nisn' => 'required|unique:siswas,nisn',
+            'nama' => 'required',
+            'tgl' => 'required|date',
+            'alamat' => 'required',
+            'jjg' => 'required',
+            'hp' => 'required',
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi file gambar
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -59,14 +65,27 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\Models\User
+     * @return \App\Models\Siswa
      */
     protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-    }
+{
+    // Handle file upload
+    $file = $data['foto']; // Ambil file dari permintaan
+    $fileName = $file->getClientOriginalName(); // Dapatkan nama file asli
+
+    // Simpan file di direktori 'foto' dalam disk publik
+    $file->storeAs('foto', $fileName, 'public');
+
+    return Siswa::create([
+        'nisn' => $data['nisn'],
+        'nama' => $data['nama'],
+        'tgl' => $data['tgl'],
+        'alamat' => $data['alamat'],
+        'jjg' => $data['jjg'],
+        'hp' => $data['hp'],
+        'foto' => $fileName, // Simpan nama file ke dalam basis data
+        'password' => Hash::make($data['password']), // Enkripsi kata sandi
+    ]);
+}
+
 }
