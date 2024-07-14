@@ -3,8 +3,8 @@
 return [
 
     'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
+        'guard' => 'siswa',
+        'passwords' => 'siswas',
     ],
 
     'guards' => [

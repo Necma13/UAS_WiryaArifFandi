@@ -69,11 +69,11 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
 {
-    // Handle file upload
-    $file = $data['foto']; // Ambil file dari permintaan
-    $fileName = $file->getClientOriginalName(); // Dapatkan nama file asli
 
-    // Simpan file di direktori 'foto' dalam disk publik
+    $file = $data['foto'];
+    $fileName = $file->getClientOriginalName();
+
+
     $file->storeAs('foto', $fileName, 'public');
 
     return Siswa::create([
@@ -83,8 +83,8 @@ class RegisterController extends Controller
         'alamat' => $data['alamat'],
         'jjg' => $data['jjg'],
         'hp' => $data['hp'],
-        'foto' => $fileName, // Simpan nama file ke dalam basis data
-        'password' => Hash::make($data['password']), // Enkripsi kata sandi
+        'foto' => $fileName,
+        'password' => Hash::make($data['password']),
     ]);
 }
 
