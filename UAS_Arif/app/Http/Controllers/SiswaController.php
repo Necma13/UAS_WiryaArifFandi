@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Siswa;
 
 class SiswaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:siswa');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -14,7 +20,7 @@ class SiswaController extends Controller
     {
         $nomor = 1;
         $sis = Siswa::all();
-        return view('siswa.index',compact('nomor','sis'));
+        return view('siswa.index', compact('nomor', 'sis'));
     }
 
     /**
@@ -37,7 +43,7 @@ class SiswaController extends Controller
             'alamat' => 'required',
             'jjg' => 'required',
             'hp' => 'required',
-            'foto' => 'reqire'
+            'foto' => 'required'
         ]);
 
         $sis = new Siswa;
@@ -50,8 +56,7 @@ class SiswaController extends Controller
         $sis->foto = $request->foto->getClientOriginalName();
         $sis->save();
 
-        $request->foto->storeAs('foto',$request->foto->getClientOriginalName());
-
+        $request->foto->storeAs('foto', $request->foto->getClientOriginalName());
 
         return redirect('/siswa/');
     }
@@ -104,15 +109,18 @@ class SiswaController extends Controller
 
         return redirect('/siswa/');
     }
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $nisn)
     {
         $sis = Siswa::find($nisn);
-        $sis->delete();
-
-        return redirect('/siswa/');
+        if ($sis) {
+            $sis->delete();
+            return redirect('/siswa/');
+        } else {
+            return redirect('/siswa/')->withErrors('Data tidak ditemukan');
+        }
     }
 }
-

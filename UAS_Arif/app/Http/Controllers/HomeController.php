@@ -3,26 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Siswa;
+use App\Models\Nilai;
+use App\Models\Pembayaran;
+use App\Models\Pelajaran;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth:siswa');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
-        return view('home');
+        $siswa = Auth::guard('siswa')->user();
+        $nilai = Nilai::where('nisn', $siswa->nisn)->first();
+        $pembayaran = Pembayaran::where('nisn', $siswa->nisn)->latest()->first();
+        $pelajaran = Pelajaran::all();
+
+        return view('home', compact('nilai', 'pembayaran', 'pelajaran'));
     }
 }
