@@ -129,7 +129,7 @@
                             <div class="row mb-3">
                                 <label for="foto" class="col-md-4 col-form-label text-md-end">{{ __('Foto') }}</label>
                                 <div class="col-md-6">
-                                    <input id="foto" type="file" class="form-control @error('foto') is-invalid @enderror" name="foto" required>
+                                    <input id="foto" type="file" accept="image/*" class="form-control @error('foto') is-invalid @enderror" name="foto" required>
                                     @error('foto')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

@@ -63,19 +63,19 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/siswa/">
+                            <a class="nav-link" href="/siswa">
                                 <i class="fas fa-fw fa-user"></i>
-                                <span>Siswa</span></a>
+                                <span>Profile</span></a>
                         </li>
 
                        <li class="nav-item">
-                                <a class="nav-link" href="/pembayaran/">
+                                <a class="nav-link" href="/pembayaran">
                                     <i class="fas fa-fw fa-money-bill"></i>
                                     <span>Pembayaran</span></a>
                         </li>
 
                         <li class="nav-item">
-                                <a class="nav-link" href="/pelajaran/">
+                                <a class="nav-link" href="/pelajaran">
                                     <i class="fas fa-fw fa-book"></i>
                                     <span>Pelajaran</span></a>
                         </li>
@@ -136,7 +136,7 @@
                                         <a class="dropdown-item text-dark" href="email.html"><span class="mb-0 d-inline-block me-1"><i class="ti ti-mail"></i></span> Email</a>
                                         <div class="dropdown-divider border-top"></div>
                                         <a class="dropdown-item text-dark" href="lock-screen.html"><span class="mb-0 d-inline-block me-1"><i class="ti ti-lock"></i></span> Lockscreen</a>
-                                        <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">logout</a>
+                                        <a class="dropdown-item text-dark" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span class="mb-0 d-inline-block me-1"><i class="ti ti-logout"></i></span>logout</a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                                 @csrf
                                             </form>

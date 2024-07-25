@@ -43,7 +43,7 @@ class SiswaController extends Controller
             'alamat' => 'required',
             'jjg' => 'required',
             'hp' => 'required',
-            'foto' => 'required'
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         $sis = new Siswa;
@@ -53,10 +53,14 @@ class SiswaController extends Controller
         $sis->alamat = $request->alamat;
         $sis->jjg = $request->jjg;
         $sis->hp = $request->hp;
-        $sis->foto = $request->foto->getClientOriginalName();
-        $sis->save();
 
-        $request->foto->storeAs('foto', $request->foto->getClientOriginalName());
+        if ($request->hasFile('foto')) {
+            $fileName = time() . '_' . $request->foto->getClientOriginalName();
+            $request->foto->storeAs('foto', $fileName);
+            $sis->foto = $fileName;
+        }
+
+        $sis->save();
 
         return redirect('/siswa/');
     }
@@ -66,7 +70,12 @@ class SiswaController extends Controller
      */
     public function show(string $nisn)
     {
-        //
+        $siswa = Siswa::where('nisn', $nisn)->first();
+        if ($siswa) {
+            return view('siswa.show', compact('siswa'));
+        } else {
+            return redirect('/siswa/')->withErrors('Data tidak ditemukan');
+        }
     }
 
     /**
@@ -74,7 +83,7 @@ class SiswaController extends Controller
      */
     public function edit(string $nisn)
     {
-        $sis = Siswa::find($nisn);
+        $sis = Siswa::where('nisn', $nisn)->first();
         if ($sis) {
             return view('siswa.edit', compact('sis'));
         } else {
@@ -92,22 +101,29 @@ class SiswaController extends Controller
             'tgl' => 'required|date',
             'alamat' => 'required',
             'jjg' => 'required',
-            'hp' => 'required'
+            'hp' => 'required',
+            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
-        $sis = Siswa::find($nisn);
+        $sis = Siswa::where('nisn', $nisn)->first();
         if ($sis) {
             $sis->nama = $request->nama;
             $sis->tgl = $request->tgl;
             $sis->alamat = $request->alamat;
             $sis->jjg = $request->jjg;
             $sis->hp = $request->hp;
+
+            if ($request->hasFile('foto')) {
+                $fileName = time() . '_' . $request->foto->getClientOriginalName();
+                $request->foto->storeAs('foto', $fileName);
+                $sis->foto = $fileName;
+            }
+
             $sis->save();
+            return redirect('/siswa/');
         } else {
             return redirect('/siswa/')->withErrors('Data tidak ditemukan');
         }
-
-        return redirect('/siswa/');
     }
 
     /**
@@ -115,7 +131,7 @@ class SiswaController extends Controller
      */
     public function destroy(string $nisn)
     {
-        $sis = Siswa::find($nisn);
+        $sis = Siswa::where('nisn', $nisn)->first();
         if ($sis) {
             $sis->delete();
             return redirect('/siswa/');
