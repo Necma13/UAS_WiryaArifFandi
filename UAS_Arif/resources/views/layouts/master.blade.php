@@ -79,6 +79,12 @@
                                     <i class="fas fa-fw fa-book"></i>
                                     <span>Pelajaran</span></a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/nilai">
+                                <i class="fas fa-fw fa-graduation-cap"></i>
+                                <span>Nilai</span></a>
+                        </li>
                     </ul>
                     <!-- sidebar-menu  -->
                 </div>

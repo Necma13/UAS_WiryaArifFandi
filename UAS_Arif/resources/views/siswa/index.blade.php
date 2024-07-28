@@ -1,57 +1,32 @@
 @extends('layouts.master')
-@section('title','Data Siswa')
-@section('judul','Data siswa')
-@section('nama','Hananan Academy')
+@section('title', 'Profil Siswa')
+@section('judul', 'Profil Siswa')
+@section('nama', 'Hananan Academy')
+@section('css')
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+@endsection
+
 @section('content')
- <!-- Modal Detail-->
- @forelse ($sis as $item)
- <div class="modal fade" id="detail{{$item->nisn}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Detail {{$item->nama}}</h1>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{{ asset('storage/foto/'.$siswa->foto) }}" class="card-img-top" alt="Foto Siswa">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $siswa->nama }}</h5>
+                    <p class="card-text">NISN: {{ $siswa->nisn }}</p>
+                    <p class="card-text">Tanggal Lahir: {{ $siswa->tgl }}</p>
+                    <p class="card-text">Alamat: {{ $siswa->alamat }}</p>
+                    <p class="card-text">Jenjang Pendidikan: {{ $siswa->jjg }}</p>
+                    <p class="card-text">Nomor HP: {{ $siswa->hp }}</p>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-            <table class="table">
-
-                <tbody>
-                        <tr>
-                            <td>NISN</td>
-                            <th scope="row">{{$item->nisn}}</th>
-                        </tr>
-                        <tr>
-                            <td>Nama</td>
-                            <th scope="row">{{$item->nama}}</th>
-                        </tr>
-                        <tr>
-                            <td>Tanggal Lahir</td>
-                            <th scope="row">{{$item->tgl}}</th>
-                        </tr>
-                        <tr>
-                            <td>Alamat</td>
-                            <th scope="row">{{$item->alamat}}</th>
-                        </tr>
-                        <tr>
-                            <td>Jenjang Pendidikan</td>
-                            <th scope="row">{{$item->jjg}}</th>
-                        </tr>
-                        <tr>
-                            <td>Nomor HP</td>
-                            <th scope="row">{{$item->hp}}</th>
-                        </tr>
-                        <tr>
-                            <td>Foto</td>
-                            <th scope="row"><img src="{{ asset('/foto/'.$item->foto) }}" width="100" alt=""></th>
-                        </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-
-        </div>
-    </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 @endsection

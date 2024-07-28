@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\PelajaranController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\NilaiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,25 +25,22 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 // Data siswa
-Route::get('/siswa/', [SiswaController::class, 'index'])->middleware('auth');
-Route::get('/siswa/form/', [SiswaController::class, 'create'])->middleware('auth');
-Route::post('/siswa/store/', [SiswaController::class, 'store'])->middleware('auth');
-Route::get('/siswa/edit/{nisn}', [SiswaController::class, 'edit'])->middleware('auth');
-Route::put('/siswa/{nisn}', [SiswaController::class, 'update'])->middleware('auth');
-Route::delete('/siswa/{nisn}', [SiswaController::class, 'destroy'])->middleware('auth');
+Route::middleware(['auth:siswa'])->group(function () {
+    Route::get('/siswa', [SiswaController::class, 'index'])->name('siswa.index');
+});
 
 //Data Pelajaran
-Route::get('/pelajaran/', [PelajaranController::class, 'index'])->middleware('auth');
-Route::get('/pelajaran/form/', [PelajaranController::class, 'create'])->middleware('auth');
-Route::post('/pelajaran/store/', [PelajaranController::class, 'store'])->middleware('auth');
-Route::get('/pelajaran/edit/{id}', [PelajaranController::class, 'edit'])->middleware('auth');
-Route::put('/pelajaran/{id}', [PelajaranController::class, 'update'])->middleware('auth');
-Route::delete('/pelajaran/{id}', [PelajaranController::class, 'destroy'])->middleware('auth');
+Route::middleware(['auth:siswa'])->group(function () {
+    Route::get('/pelajaran', [PelajaranController::class, 'index'])->name('pelajaran.index');
+});
 
 //Data Pembayaran
-Route::get('/pembayaran/', [PembayaranController::class, 'index'])->middleware('auth');
-Route::get('/pembayaran/form/', [PembayaranController::class, 'create'])->middleware('auth');
-Route::post('/pembayaran/store/', [PembayaranController::class, 'store'])->middleware('auth');
-Route::get('/pembayaran/edit/{id}', [PembayaranController::class, 'edit'])->middleware('auth');
-Route::put('/pembayaran/{id}', [PembayaranController::class, 'update'])->middleware('auth');
-Route::delete('/pembayaran/{id}', [PembayaranController::class, 'destroy'])->middleware('auth');
+Route::middleware(['auth:siswa'])->group(function () {
+    Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');
+});
+
+//Data Nilai
+Route::middleware(['auth:siswa'])->group(function () {
+    Route::get('/nilai', [NilaiController::class, 'index'])->name('nilai.index');
+});
+
